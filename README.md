@@ -58,9 +58,10 @@ Environment variables supported by the container script:
 - `CONTAINER_PORT` — container port (default: `8080`)
 - `DATA_DIR` — host directory for the SQLite database (default: `./.collattice-data`)
 - `RESTART_POLICY` — Docker restart policy (default: `unless-stopped`; set to `no` to disable auto-restart)
+- `RUN_AS` — `uid:gid` the container runs as (default: your own, from `id -u`/`id -g`, so files in `DATA_DIR` belong to you rather than root)
 - `ADMIN_KEY` — admin auth key passed to the container (default: the image's `cocollattice`)
 
-`restart` removes and recreates the container (data in `DATA_DIR` is kept). `start` on an existing container reapplies `RESTART_POLICY`.
+The user is fixed when the container is created, so run `restart` once to switch an existing container (and `chown` any root-owned files in `DATA_DIR` first). `restart` removes and recreates the container (data in `DATA_DIR` is kept). `start` on an existing container reapplies `RESTART_POLICY`.
 
 The container script disables Docker auto-restart before calling `docker stop`, so a stopped container stays stopped instead of immediately restarting.
 

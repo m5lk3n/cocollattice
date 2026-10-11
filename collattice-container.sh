@@ -7,6 +7,7 @@ HOST_PORT="${HOST_PORT:-8080}"
 CONTAINER_PORT="${CONTAINER_PORT:-8080}"
 DATA_DIR="${DATA_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.collattice-data}"
 RESTART_POLICY="${RESTART_POLICY:-unless-stopped}"
+RUN_AS="${RUN_AS:-$(id -u):$(id -g)}"
 
 mkdir -p "$DATA_DIR"
 
@@ -23,9 +24,10 @@ Environment variables:
   CONTAINER_PORT    Container port (default: 8080)
   DATA_DIR         Host directory for the SQLite database (default: ./.collattice-data)
   RESTART_POLICY   Docker restart policy (default: unless-stopped; use no to disable auto-restart)
+  RUN_AS           uid:gid to run the container as (default: the invoking user's, so files in DATA_DIR are owned by you)
   ADMIN_KEY        Admin auth key to pass to the container (default: the one baked into the image)
 
-'restart' recreates the container, so it picks up a rebuilt image.
+'restart' recreates the container, so it picks up a rebuilt image or a changed RUN_AS.
 EOF
 }
 
@@ -47,6 +49,8 @@ start_container() {
   docker run -d \
     --name "$CONTAINER_NAME" \
     --restart "$RESTART_POLICY" \
+    --user "$RUN_AS" \
+    -e "HOME=/tmp" \
     -p "${HOST_PORT}:${CONTAINER_PORT}" \
     -e "ASPNETCORE_URLS=http://0.0.0.0:${CONTAINER_PORT}" \
     -e "ConnectionStrings__Board=Data Source=/data/collattice.db" \

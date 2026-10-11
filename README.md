@@ -56,7 +56,7 @@ Environment variables supported by the container script:
 - `CONTAINER_NAME` — container name (default: `collattice`)
 - `HOST_PORT` — host port mapping (default: `8080`)
 - `CONTAINER_PORT` — container port (default: `8080`)
-- `DATA_DIR` — host directory for the SQLite database (default: `./.collattice-data`)
+- `DATA_DIR` — host directory for the SQLite database (default: `./collattice`)
 - `RESTART_POLICY` — Docker restart policy (default: `unless-stopped`; set to `no` to disable auto-restart)
 - `RUN_AS` — `uid:gid` the container runs as (default: your own, from `id -u`/`id -g`, so files in `DATA_DIR` belong to you rather than root)
 - `ADMIN_KEY` — admin auth key passed to the container (default: the image's `cocollattice`)

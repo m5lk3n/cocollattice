@@ -5,7 +5,7 @@ IMAGE_NAME="${IMAGE_NAME:-collattice:latest}"
 CONTAINER_NAME="${CONTAINER_NAME:-collattice}"
 HOST_PORT="${HOST_PORT:-8080}"
 CONTAINER_PORT="${CONTAINER_PORT:-8080}"
-DATA_DIR="${DATA_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.collattice-data}"
+DATA_DIR="${DATA_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/collattice}"
 RESTART_POLICY="${RESTART_POLICY:-unless-stopped}"
 RUN_AS="${RUN_AS:-$(id -u):$(id -g)}"
 
@@ -22,7 +22,7 @@ Environment variables:
   CONTAINER_NAME    Container name (default: collattice)
   HOST_PORT         Host port to expose (default: 8080)
   CONTAINER_PORT    Container port (default: 8080)
-  DATA_DIR         Host directory for the SQLite database (default: ./.collattice-data)
+  DATA_DIR         Host directory for the SQLite database (default: ./collattice)
   RESTART_POLICY   Docker restart policy (default: unless-stopped; use no to disable auto-restart)
   RUN_AS           uid:gid to run the container as (default: the invoking user's, so files in DATA_DIR are owned by you)
   ADMIN_KEY        Admin auth key to pass to the container (default: the one baked into the image)

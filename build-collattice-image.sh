@@ -4,7 +4,7 @@ set -Eeuo pipefail
 REPO="MrBildo/collattice"
 TARGET_ARCH="${TARGET_ARCH:-x64}"
 IMAGE_NAME="${IMAGE_NAME:-collattice:latest}"
-WORKDIR="${WORKDIR:-$(pwd)/.collattice-build}"
+WORKDIR="${WORKDIR:-$(pwd)/build}"
 
 case "$TARGET_ARCH" in
   x64|arm64) ;;

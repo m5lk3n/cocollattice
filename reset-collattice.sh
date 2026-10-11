@@ -2,7 +2,7 @@
 set -Eeuo pipefail
 
 CONTAINER_NAME="${CONTAINER_NAME:-collattice}"
-DATA_DIR="${DATA_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.collattice-data}"
+DATA_DIR="${DATA_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/collattice}"
 DB_PATH="${DB_PATH:-${DATA_DIR}/collattice.db}"
 
 usage() {
@@ -15,7 +15,7 @@ Asks for confirmation unless --yes is given.
 
 Environment variables:
   CONTAINER_NAME  Docker container name (default: collattice)
-  DATA_DIR        Host directory containing the SQLite DB (default: ./.collattice-data)
+  DATA_DIR        Host directory containing the SQLite DB (default: ./collattice)
   DB_PATH         Full path to the database file (default: DATA_DIR/collattice.db)
 EOF
 }
